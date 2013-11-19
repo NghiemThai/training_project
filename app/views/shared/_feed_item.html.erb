@@ -4,6 +4,7 @@
     <%= link_to feed_item.user.name, feed_item.user %>
   </span>
   <h4 class="content"><%= feed_item.title %></h4>
+  <h4 class="title"><%= link_to feed_item.title,  {:controller => 'entries', :action => 'show', :id => feed_item.id}%></h4>
   <span class="content"><%= feed_item.body %></span>
   <span class="timestamp">
     Posted <%= time_ago_in_words(feed_item.created_at) %> ago.

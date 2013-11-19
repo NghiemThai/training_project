@@ -5,6 +5,13 @@ class EntriesController < ApplicationController
   def index
   end
   
+  def show
+    @entry = Entry.find(params[:id])
+    @comments = @entry.comments.paginate(page: params[:page])
+    # binding.pry
+    @comment = Comment.new
+  end
+  
   def create
     @entry = current_user.entries.build(entry_params)
     if @entry.save

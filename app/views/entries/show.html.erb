@@ -1,0 +1,23 @@
+<%= @entry.title%>, <%@entry.body%>
+<h4 class="content"><%= @entry.title %></h4>
+  <span class="content"><%= @entry.body %></span>
+  <br /><br />
+  <div class="span8">
+        <% if @entry.comments.any? %>
+                  <h4>Comment (<%= @entry.comments.count %>)</h4>
+                  <ol class="comments-list">
+                    <%= render @comments %>
+                  </ol>
+                  
+                  <%= will_paginate @comments %>
+        <% end %>
+</div>
+  
+  <%= form_for(@comment) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <div class="field">
+    <%= f.text_area :content, placeholder: "" %>
+    <%= hidden_field_tag 'entry_id', params[:id]%>
+  </div>
+  <%= f.submit "Post", class: "btn btn-large btn-primary" %>
+<% end %>
